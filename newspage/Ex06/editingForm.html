@@ -1,0 +1,119 @@
+<?PHP
+
+// _GET 배열에서 테이블 이름 변수, 게시판 글 번호 변수 가져오기 
+$board = $_GET['board'];
+$link = $_GET['link'];
+$id    = $_GET['id'];    
+
+include ("../../connDB.php");  
+
+$sql = "SELECT * FROM $board WHERE id=$id;";
+$result = mysqli_query($con, $sql);  
+
+// 수정하고자 하는 원본 게시물에서 수정 가능한 항목을 추출함
+$row = mysqli_fetch_array($result); 
+$writer  = $row['writer'];		
+$topic   = $row['topic'];		
+$content = $row['content'];	
+$email   = $row['email'];		
+
+mysqli_close($con); 
+
+?>
+
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Future Imperfect by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="../../main.html">Webzin</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="../news.html">News</a></li>
+								<li><a href="../col-table.php">Board</a></li>
+								<li><a href="../../pollpage/poll.html">Event</a></li>
+								<li><a href="../../gallerypage/gallery.html">Gallery</a></li>
+							</ul>
+						</nav>
+					</header>
+
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2>
+										<a href="Board-show.html?board=<?PHP
+										echo $board
+										?>&link=$link">
+										<?PHP
+										echo $board." 자유 게시판: 수정";
+										?>
+										</a>
+										</h2>
+									</div>
+									<!--
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">December 10, 2021</time>
+										<span class="name">배경희</span>
+									</div>
+									-->
+								</header>
+
+								<body>
+	  <!--  inputForm과 같은데 비밀번호를 제외한 모든 값이 채워짐   -->
+		<!-- JSP 시작: inputForm에서 복사해서 수정 -->
+	<form method='post' action='board-updateRecord.php?board=<?=$board?>&id=<?=$id?>&link=<?=$link?>'>
+
+	  <table class='inputF'>
+	  <caption>게시판</caption>
+	  <tr><th>이름</th>   <td><input type='text' name='writer' size='20' value='<?=$writer?>'></td></tr>
+		<tr><th>Email</th> <td><input type='text' name='email' size='78' value='<?=$email?>'></td></tr>
+		<tr><th>제목</th>   <td><input type='text' name='topic' size='78' value='<?=$topic?>'></td></tr>
+	  <tr><th>내용</th>   <td><textarea name='content' rows='12' cols='80' value='<?=$content?>'></textarea></td></tr>
+	  <tr><th>암호</th>   <td><input type='password' name='passwd' size='20'></td></tr>
+	  </table>
+
+	  <table class='bottom'>
+	  <tr><td><input type='submit' value='수정완료'> <input type='reset' value='지우기'> </td></tr>
+	  </table>
+
+	</form>
+		<!-- JSP 여기까지 -->
+
+</body>
+							</article>
+
+						
+
+					</div>
+
+				
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

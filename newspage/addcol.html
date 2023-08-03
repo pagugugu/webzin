@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>News</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../newspage/assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="../main.html">Webzin</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="news.html">News</a></li>
+								<li><a href="col-table.php">Board</a></li>
+								<li><a href="../pollpage/poll.html">Event</a></li>
+								<li><a href="../gallerypage/gallery.html">Gallery</a></li>
+							</ul>
+						</nav>
+					</header>
+
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2 style="display: inline-block; width:80%; margin:0;"><a href="news.html">News</a></h2>
+										<p>[<a href='col-table.php'>목록으로</a>]</p>
+									</div>
+								</header>
+								 <table>
+  <form method='post' action='col-insertRecord.php' enctype='multipart/form-data'>
+  <tr><th width='25%;'>기사제목</th>
+      <td><input type='text' name='title' size='60' class='myInput' required ></td></tr>
+  <tr><th>소제목</th>
+      <td><input type='text' name='subtitle' size='70'class='myInput' required ></td></tr>
+  <tr><th>작성일</th>
+      <td><input type='text' name='wdate' size='70'class='myInput' required ></td></tr>
+  <tr><th>작성자</th>
+      <td><input type='text' name='writer' size='70'class='myInput' required ></td></tr>
+  <tr><th>대표사진</th>
+      <td><input type='file' name='imgfile' size='70' maxlength='80' class='myInput' required></td></tr>
+  <tr><th>개 요</th>
+      <td><input type='textarea' name='outline' size='70'class='myInput' required></td></tr>
+  <tr><th>기사링크</th>
+      <td><input type='text' name='link' size='70'class='myInput' required></td></tr>
+  <tr><th>게시판</th>
+      <td><input type='text' name='tablename' size='70'class='myInput' required></td></tr>
+  <tr><th>암 호</th>
+      <td><input type='password' name='passwd' size='15' class='myInput' required></td></tr>
+  <tr><td colspan='2' class='bottom' style='text-align:center;'><input type='submit' value='사진등록' class='button'></td></tr>
+</table>
+							</article>
+
+						
+
+					</div>
+
+				
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

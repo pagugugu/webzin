@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Single - Future Imperfect by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
+	</head>
+	<body class="single is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="../main.html">Webzin</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="news.html">News</a></li>
+								<li><a href="col-table.php">Board</a></li>
+								<li><a href="../pollpage/poll.html">Event</a></li>
+								<li><a href="../gallerypage/gallery.html">Gallery</a></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2>깊은 물속과 같은 조승우 캐릭터</h2>
+										<p>조승우 배우가 연기에 깊게 빠져 있을 때</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2021-12-11">December 10, 2021</time>
+										<span class="name">Jeong Hoon Lee</span><img src="images/avatar.jpg" alt="" />
+									</div>
+								</header>
+								<span class="image featured">
+								<img src="images/jsw9.jpg" alt="" />
+								</span>
+								
+								<!-- 1 문단  -->
+								
+								<p align="center">
+								나는 조승우 배우가 연기에 깊게 빠져 있을 때,
+								<br>
+								자신의 예술을 펼치는 내적인 공간이 있다는 것을 느꼈다.
+								<br>
+								그 공간은 침체되면서도 잔잔한, 깊은 물속과 같은 세계였다.
+								<br>
+								그는 다양한 얼굴을 가지고 있다.
+								<br>
+								무대 밖에서는 순박하게 보이던 그가
+								<br>
+								무대위에서는 폭발적인 카리스마를 보여주기도 하고
+								<br>
+								느긋한, 클래식한 면을 가지고 있기도 하다.
+								</p>
+
+<?php
+
+$board = $_GET['board'];
+$link = $_GET['link'];
+include ("../connDB.php");  // mySQL 접속
+//$likecont = $_GET['likecont'];
+
+$sql = "SELECT * FROM newslist where link='$link';";
+$result = mysqli_query($con, $sql);
+
+if ($result) {
+	$row = mysqli_fetch_row($result);
+	//var_dump($row);
+	//echo $row[6];
+	$like =$row[6];
+} else {
+	$like = $likecont;
+} 
+
+$sqlboard = "SELECT * FROM $board ORDER BY id DESC;";
+$commresult = mysqli_query($con, $sqlboard); 
+if ($commresult != null){
+$total = mysqli_num_rows($commresult); 
+} else {
+$total = 0;
+}
+
+
+echo "<footer>
+									<ul class='stats'>
+										<li><a href='#'>General</a></li>
+										<li><a href='_likecont.php?board=$board&link=$link&likecont=$like' class='icon solid fa-heart'>$like</a></li>
+										<li><a href='http://localhost/main/newspage/Ex06/Board-show.html?board=$board&link=$link' class='icon solid fa-comment'>$total</a></li>
+									</ul>
+								</footer>";
+
+?>
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+								<ul class="icons">
+									<li><a href="https://twitter.com" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="https://www.facebook.com" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="https://www.instagram.com" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+								</ul>
+								<p class="copyright">&copy; Chonnam Univ.</p>
+							</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

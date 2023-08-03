@@ -1,0 +1,120 @@
+<?PHP
+ 
+include ("../../connDB.php");  
+
+// GET 변수 가져오기 
+$board = $_GET['board']; // 테이블 이름 
+$link = $_GET['link'];
+$id    = $_GET['id'];    // 게시판 글의 id
+
+$sql = "SELECT * FROM $board WHERE id=$id;";  
+$result = mysqli_query($con, $sql);  
+
+// 각 필드에 해당하는 데이터를 뽑아 내는 과정
+$row = mysqli_fetch_array($result); 
+$id      = $row['id'];	    $writer  = $row['writer']; 
+$topic   = $row['topic'];   $hit     = $row['hit'];	  
+$wdate   = $row['wdate'];   $email   = $row['email'];  
+$content = $row['content'];
+
+$hit = $hit + 1;   //조회수를 하나 증가
+$sql = "UPDATE $board SET hit=$hit WHERE id=$id;";  
+mysqli_query($con, $sql);  
+
+?>
+
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Future Imperfect by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="../../main.html">Webzin</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="../news.html">News</a></li>
+								<li><a href="../col-table.php">Board</a></li>
+								<li><a href="../../pollpage/poll.html">Event</a></li>
+								<li><a href="../../gallerypage/gallery.html">Gallery</a></li>
+							</ul>
+						</nav>
+					</header>
+
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2>
+										<a href="Board-show.html?board=$board
+										echo $board
+										?>&link=<?PHP
+										echo $link
+										?>">
+										<?PHP
+										echo $board." 자유 게시판 글쓰기";
+										?>
+										</a>
+										</h2>
+									</div>
+									<!--
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">December 10, 2021</time>
+										<span class="name">배경희</span>
+									</div>
+									-->
+								</header>
+
+								<!-- $board 테이블에서 검색한 내용을 표시 -->
+<table border='1'>
+	<tr><td width='100'>번호: <?=$id?></td>
+     	<td width='200'>글쓴이: <a href='mailto:<?=$email?>'><?=$writer?></a></td>
+    	<td width='300'>글쓴날짜: <?=$wdate?></td>
+    	<td width='100'>조회: <?=$hit?></td>
+	</tr>
+	<tr><td colspan='4' class='left'>제목: <?=$topic?></td></tr>
+	<tr><td colspan='4' class='left'><pre><?=$content?></pre></td></tr>
+</table>
+
+ <table class='bottom' style = 'text-align: center;'>
+  <tr><td>
+	<button type="submit" onclick="location.href='inputPassword.html?board=<?=$board?>&id=<?=$id?>&mode=0&link=<?=$link?>'">수정</button>
+	<button type="submit" onclick="location.href='inputPassword.html?board=<?=$board?>&id=<?=$id?>&mode=1&link=<?=$link?>'">삭제</button>
+	<button type="submit" onclick="location.href='replyContent.html?board=<?=$board?>&id=<?=$id?>&link=<?=$link?>'">답변</button>
+	<button type="submit" onclick="location.href='Board-show.html?board=<?=$board?>&link=<?=$link?>'">리스트</button>
+	</td></tr>
+</table>
+							</article>
+
+						
+
+					</div>
+
+				
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
