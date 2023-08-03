@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Future Imperfect by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../newspage/assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="../main.html">Webzin</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="../newspage/news.html">News</a></li>
+								<li><a href="../newspage/col-table.php">Board</a></li>
+								<li><a href="../pollpage/poll.html">Event</a></li>
+								<li><a href="gallery.html">Gallery</a></li>
+							</ul>
+						</nav>
+					</header>
+
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2 style="display: inline-block; width:80%; margin:0;" ><a href="gallery.html">Gallery</a></h2>
+										<h1 style="float:right;"> [<a href='photo-table.php'>전체목록</a>] </h1>
+									</div>
+								</header>
+								
+								<table>
+  
+  <form method='post' action='photo-insertRecord.php' enctype='multipart/form-data'>
+  <tr><th width='100px;'>배우이름</th>
+      <td><input type='text' name='wname' size='10' class='myInput'></td></tr>
+  <tr><th>뮤지컬제목, 배역</th>
+      <td><input type='text' name='summary' size='70'class='myInput'></td></tr>
+  <tr><th>사진화일</th>
+      <td><input type='file' name='userfile' size='47' maxlength='80' class='myInput'></td></tr>
+  <tr><th>암 호</th>
+      <td><input type='password' name='passwd' size='15' class='myInput'></td></tr>
+	  <tr><td  colspan='2'  class='bottom' style="text-align: center;"><br/><input type='submit' value='사진등록' class='button' ></td></tr>
+</table>
+								
+							</article>
+
+						
+
+					</div>
+
+				
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

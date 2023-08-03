@@ -1,0 +1,124 @@
+<?PHP
+	session_start();
+?>
+
+<!DOCTYPE HTML>
+<!--
+   Lens by HTML5 UP
+   html5up.net | @ajlkn
+   Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+   <head>
+      <title>Gallery</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+      <link rel="stylesheet" href="assets/css/main.css" />
+      <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+      <style>
+      .btnback{position: fixed; top:10px; left: 10px;}
+   </style>
+   </head>
+   <body class="is-preload-0 is-preload-1 is-preload-2">
+   
+
+      <!-- Main -->
+         <div id="main">
+
+            <!-- Header -->
+               <header id="header">
+               <button class="btnback" onclick = "location.href = '../main.html' "><img src="images/back.png" width="10px"></button>
+                  <h1>Gallery</h1>
+                  <p>연말을 책임질 뮤지컬! </p>
+                  <ul class="icons">
+					<?php
+						if ($_SESSION) {
+						if ($_SESSION["ses_admin"]){
+					?>
+				  <li>
+					<button class="upload" onclick = "location.href = './addgallery.html' "><img src="images/upload.png" width="30px"></button>
+				  </li>
+					<?php
+						}}
+					?>
+                     <li><a href="https://twitter.com" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                     <li><a href="https://www.instagram.com" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                     <li><a href="https://www.google.com/intl/ko/gmail/about/#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+                  </ul>
+               </header>
+
+            <!-- Thumbnail -->
+
+<?PHP
+//mySQL 접속 
+include ("../connDB.php");  
+
+$result = mysqli_query($con, "SELECT * FROM photo ORDER BY wdate DESC;");
+$total = mysqli_num_rows($result);
+
+?>
+               <section id="thumbnails">
+			   <?PHP
+
+$pagesize = 8;
+// 페이지 번호 유무 확인하여 없으면 1로 초기화
+ if (isset($_GET['cpage'])) $cpage = $_GET['cpage'];  
+ else $cpage = 1;		
+
+// 마지막 페이지 계산
+$endpage = (int)($total / $pagesize);
+if (($total % $pagesize) != 0) $endpage= $endpage + 1;
+// 현재 페이지의 시작 레코드 위치 찾기 
+  $counter = ($cpage-1)*$pagesize; 
+  mysqli_data_seek($result, $counter); 
+
+	// $pagesize에 맞게 레코드 출력
+  $i = 0;	
+  while ($i < $pagesize) :
+    if ($counter == $total) break; 
+    $counter++; 
+$row = mysqli_fetch_array($result);
+$wname = $row['wname'];
+$summary = $row['summary'];
+$userfile = $row['userfile'];
+
+echo ("
+				<article>
+                     <a class='thumbnail' href='./images/$userfile' data-position='left center'><img src='./images/$userfile'></a>
+                     <h2>$wname</h2>
+                     <p>$summary</p>
+                </article>
+");
+
+$i++;
+endwhile;
+
+mysqli_close($con);
+
+$ppage = $cpage - 1;
+$npage = $cpage + 1;
+
+// 이전 페이지 링크 
+if ($cpage > 1)
+   echo ("<a href='gallery.html?cpage=$ppage' class='button small previous'>Previous Page</a> ");
+
+// 중간 페이지 표시 
+if ($cpage >= 1 && $cpage != $endpage)
+   echo ("<span>$cpage </span> of <span> $endpage </span> ");
+// 다음 페이지 링크 표시 
+if ($cpage < $endpage)
+   echo (" <a href='gallery.html?cpage=$npage'  class='button small next'>Next Page</a> ");
+
+echo ("(총 사진매수: <span>$total</span>매)");
+?>
+
+         </div>
+
+      <!-- Scripts -->
+         <script src="assets/js/jquery.min.js"></script>
+         <script src="assets/js/browser.min.js"></script>
+         <script src="assets/js/breakpoints.min.js"></script>
+         <script src="assets/js/main.js"></script>
+
+   </body>
+</html>
